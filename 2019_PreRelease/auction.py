@@ -40,8 +40,6 @@ while(bidding):
             print("bid too low")
             bid = float(input("Enter the bid amount:"))
         highest_bid[i] = bid
-        if bid > reserve_price[i]:
-            sold[i] = True
 
 print("==== The End of the Auction ====")
 total_fee = 0.0
