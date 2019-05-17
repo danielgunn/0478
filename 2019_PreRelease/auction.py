@@ -1,6 +1,6 @@
-print("===== Setup - Sellers =====")
+print("===== Auction Setup - Sellers =====")
 
-num_items = int(input("how many items will be sold?"))
+num_items = int(input("Number of items to sell:"))
 while num_items < 0:
     print("invalid number")
     num_items = int(input("how many items will be sold?"))
