@@ -1,0 +1,112 @@
+DECLARE reserve_price : ARRAY[0:num_items] OF FLOAT
+DECLARE description : ARRAY[0:num_items] OF STRING
+DECLARE highest_bid : ARRAY[0:num_items] OF FLOAT
+DECLARE num_items AS INTEGER
+DECLARE bids AS INTEGER
+DECLARE total_fee AS FLOAT
+DECLARE i AS INTEGER
+DECLARE bid AS FLOAT
+DECLARE num_items_sold AS INTEGER
+DECLARE num_items_underbid AS INTEGER
+DECLARE num_items_nobid AS INTEGER
+
+PRINT "===== Auction Setup - Sellers ====="
+
+PRINT "Number of items to sell:"
+READ num_items
+
+WHILE num_items < 0 DO
+    PRINT "invalid number"
+    PRINT "how many items will be sold?"
+    READ num_items
+ENDWHILE
+
+FOR i ← 1 TO num_items:
+    PRINT "-- Item", (i+1), " --"
+    PRINT "Enter the description:"
+    READ description[i]
+    WHILE (LEN(description[i]) < 1) DO
+        PRINT "Invalid description"
+        PRINT "Enter the description:"
+        READ description[i]
+    ENDWHILE
+    PRINT "Enter the reserve price:"
+    READ reserve_price[i]
+    highest_bid[i] ← 0.0
+
+    WHILE reserve_price[i] < 0 DO
+        PRINT "Invalid price"
+        PRINT "Enter the reserve price:"
+        READ reserve_price[i]
+    DONE
+
+PRINT "===== The Bidding ======"
+i ← -1
+WHILE i <> 0 DO
+    FOR i ← 1 TO num_items
+        PRINT (i+1), "-", description[i], "-", highest_bid[i]
+    PRINT "Enter item number or 0 to quit:"
+    READ i
+    WHILE (i<0 OR i>num_items) DO
+        PRINT "Invalid choice"
+        PRINT "Enter item number or 0 to quit:"
+        READ i
+    ENDWHILE
+
+    IF i > 0
+        THEN
+            PRINT "Enter the bid amount:"
+            READ bid
+            WHILE (bid < highest_bid[i-1]) DO
+                PRINT "bid too low"
+                PRINT "Enter the bid amount:"
+                READ bid
+            ENDWHILE
+            highest_bid[i-1] ← bid
+     ENDIF
+ENDWHILE
+
+
+PRINT "==== The End of the Auction ===="
+total_fee ← 0.0
+num_items_sold ← 0
+num_items_underbid ← 0
+num_items_nobid ← 0
+
+PRINT "-- Sold Items --"
+PRINT "number - price - item"
+FOR i ← 1 TO num_items
+    IF (highest_bid[i] >= reserve_price[i])
+        THEN
+            sold[i] ← TRUE
+            total_fee ← total_fee + 0.1 * highest_bid[i]
+            num_items_sold ← num_items_sold + 1
+            PRINT (i+1), " - ", highest_bid[i], " - ", description[i]
+        ELSE
+            sold[i] ← FALSE
+    ENDIF
+NEXT
+PRINT "total fee:", total_fee
+PRINT "-- Items that did not reached reserve price --"
+PRINT "Number - Bid - Item"
+FOR i ← 1 TO num_items
+    IF (NOT sold[i] AND highest_bid[i] > 0)
+        THEN
+            PRINT (i+1), " - ", highest_bid[i], " - ", description[i]
+            num_items_underbid ← num_items_underbid + 1
+    ENDIF
+NEXT
+PRINT "-- Items that received no bids -- "
+PRINT "Number - Item"
+FOR i ← 1 TO num_items:
+    IF (NOT sold[i] AND highest_bid[i] = 0)
+        THEN
+            PRINT (i+1), " - ", description[i]
+            num_items_nobid ← num_items_nobid + 1
+    ENDIF
+NEXT
+
+PRINT "-- Summary --"
+PRINT num_items_sold, "items sold"
+PRINT num_items_underbid, "items that did not meet the reserve price"
+PRINT num_items_nobid, "items did not receive any bids"
