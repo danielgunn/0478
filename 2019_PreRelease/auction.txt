@@ -1,11 +1,11 @@
-DECLARE reserve_price : ARRAY[0:num_items] OF FLOAT
+DECLARE reserve_price : ARRAY[0:num_items] OF REAL
 DECLARE description : ARRAY[0:num_items] OF STRING
-DECLARE highest_bid : ARRAY[0:num_items] OF FLOAT
+DECLARE highest_bid : ARRAY[0:num_items] OF REAL
 DECLARE num_items AS INTEGER
 DECLARE bids AS INTEGER
-DECLARE total_fee AS FLOAT
+DECLARE total_fee AS REAL
 DECLARE i AS INTEGER
-DECLARE bid AS FLOAT
+DECLARE bid AS REAL
 DECLARE num_items_sold AS INTEGER
 DECLARE num_items_underbid AS INTEGER
 DECLARE num_items_nobid AS INTEGER
