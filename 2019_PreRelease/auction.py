@@ -36,23 +36,20 @@ for i in range(num_items):
         reserve_price[i] = float(input("Enter the reserve price:"))
 
 print("===== The Bidding ======")
-bidding = True
-while(bidding):
+i = -1
+while(i != 0):
     for i in range(num_items):
         print(i+1,description[i],highest_bid[i])
     i = int(input("Enter item number or 0 to quit:"))
-    while (i<0 or i>num_items+1):
+    while (i<0 or i>num_items):
         print("Invalid choice")
         i = int(input("Enter item number or 0 to quit:"))
-    if i == 0:
-        bidding = False
-    else:
-        i = i-1
+    if i > 0:
         bid = float(input("Enter the bid amount:"))
-        while(bid < highest_bid[i]):
+        while(bid < highest_bid[i-1]):
             print("bid too low")
             bid = float(input("Enter the bid amount:"))
-        highest_bid[i] = bid
+        highest_bid[i-1] = bid
 
 print("==== The End of the Auction ====")
 total_fee = 0.0
@@ -60,7 +57,7 @@ num_items_sold = num_items_underbid = num_items_nobid = 0
 print("-- Sold Items --")
 print("number\tprice\titem")
 for i in range(num_items):
-    if (highest_bid[i] > reserve_price[i]):
+    if (highest_bid[i] >= reserve_price[i]):
         sold[i] = True
         total_fee += 0.1 * highest_bid[i]
         num_items_sold += 1
