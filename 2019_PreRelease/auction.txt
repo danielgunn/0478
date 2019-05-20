@@ -32,13 +32,13 @@ FOR i ← 1 TO num_items:
     ENDWHILE
     PRINT "Enter the reserve price:"
     READ reserve_price[i]
-    highest_bid[i] ← 0.0
-
     WHILE reserve_price[i] < 0 DO
         PRINT "Invalid price"
         PRINT "Enter the reserve price:"
         READ reserve_price[i]
     DONE
+    highest_bid[i] ← 0.0
+NEXT
 
 PRINT "===== The Bidding ======"
 i ← -1
