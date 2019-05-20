@@ -75,7 +75,7 @@ num_items_nobid ← 0
 
 PRINT "-- Sold Items --"
 PRINT "number - price - item"
-FOR i ← 1 TO num_items
+FOR i ← 0 TO num_items - 1
     IF (highest_bid[i] >= reserve_price[i])
         THEN
             sold[i] ← TRUE
