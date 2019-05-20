@@ -43,7 +43,7 @@ NEXT
 PRINT "===== The Bidding ======"
 i ← -1
 WHILE i <> 0 DO
-    FOR i ← 1 TO num_items
+    FOR i ← 0 TO num_items-1
         PRINT (i+1), "-", description[i], "-", highest_bid[i]
     PRINT "Enter item number or 0 to quit:"
     READ i
