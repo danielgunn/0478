@@ -21,7 +21,7 @@ WHILE num_items < 0 DO
     READ num_items
 ENDWHILE
 
-FOR i ← 1 TO num_items:
+FOR i ← 0 TO num_items-1:
     PRINT "-- Item", (i+1), " --"
     PRINT "Enter the description:"
     READ description[i]
