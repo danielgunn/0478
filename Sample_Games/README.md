@@ -15,7 +15,7 @@ It:
  - use very much code.
  
  ## How to install
- - download the three files above into your pycharm folder
+ - download the three files above into your project folder
  - install the pygame library
  - run ``circleSquareTriangle.py``
  
