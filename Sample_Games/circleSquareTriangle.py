@@ -5,7 +5,9 @@ of pygame library
 
 There are three shapes on the screen with three different motion dynamics
 author: Daniel Gunn
-background image from https://opengameart.org
+
+background image from https://opengameart.org/content/background-5
+completion sound from https://opengameart.org/content/completion-sound
 """
 import pygame
 from pygame.math import Vector2
@@ -31,6 +33,7 @@ triangle = triangle_original_surface
 pygame.init()
 
 font = pygame.font.Font("freesansbold.ttf", 18)
+pygame.mixer.music.load('gmae.wav')
 
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Circle Square Triangle')
@@ -86,6 +89,7 @@ while running:
     # if triangle and square are touching
     if triangle_rect.colliderect(square_rect):
         score += 1
+        pygame.mixer.music.play(0)
         triangle_pos = Vector2(randint(10,width - 50), randint(10,height - 50))
 
     # keep changing the red shade of the circle
