@@ -11,10 +11,12 @@ import pygame
 from pygame.math import Vector2
 from random import randint
 
+width = height = 460
+
 # starting positions of triangle, circle and square are randomized
-triangle_pos = Vector2(randint(10,400), randint(10,400))
-circle_pos = Vector2(randint(10,400), randint(10,400))
-square_pos = Vector2(randint(10,400), randint(10,400))
+triangle_pos = Vector2(randint(10,width - 50), randint(10,height - 50))
+circle_pos = Vector2(randint(10,width - 50), randint(10,height - 50))
+square_pos = Vector2(randint(10,width - 50), randint(10,height - 50))
 
 # background image
 background = pygame.image.load("background.jpg")
@@ -30,7 +32,7 @@ pygame.init()
 
 font = pygame.font.Font("freesansbold.ttf", 18)
 
-screen = pygame.display.set_mode((460, 460))
+screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Circle Square Triangle')
 running = True
 clock = pygame.time.Clock()
@@ -57,9 +59,9 @@ while running:
                 square_pos.y += 10
 
     # circles motion
-    if (circle_pos.x + circle_velocity.x < 0) or (circle_pos.x + circle_velocity.x > 420):
+    if (circle_pos.x + circle_velocity.x < 0) or (circle_pos.x + circle_velocity.x > (width - 40)):
         circle_velocity.x = -circle_velocity.x
-    if (circle_pos.y + circle_velocity.y < 0) or (circle_pos.y + circle_velocity.y > 420):
+    if (circle_pos.y + circle_velocity.y < 0) or (circle_pos.y + circle_velocity.y > (height - 40)):
         circle_velocity.y = -circle_velocity.y
     circle_pos = circle_pos + circle_velocity
 
@@ -84,7 +86,7 @@ while running:
     # if triangle and square are touching
     if triangle_rect.colliderect(square_rect):
         score += 1
-        triangle_pos = Vector2(randint(10,400), randint(10,400))
+        triangle_pos = Vector2(randint(10,width - 50), randint(10,height - 50))
 
     # keep changing the red shade of the circle
     circle_color = (circle_color + 1) % 255
