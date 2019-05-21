@@ -14,4 +14,9 @@ It:
  - contain complex data structures
  - use very much code.
  
+ ## How to install
+ - download the three files above into your pycharm folder
+ - install the pygame library
+ - run ``circleSquareTriangle.py``
+ 
  ## Modify this!
