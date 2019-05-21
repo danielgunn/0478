@@ -4,6 +4,8 @@ It isn't a fun game, but demonstrates some key functions
 of pygame library
 
 There are three shapes on the screen with three different motion dynamics
+author: Daniel Gunn
+background image from https://opengameart.org
 """
 import pygame
 from pygame.math import Vector2
@@ -14,6 +16,10 @@ triangle_pos = Vector2(randint(10,400), randint(10,400))
 circle_pos = Vector2(randint(10,400), randint(10,400))
 square_pos = Vector2(randint(10,400), randint(10,400))
 
+# background image
+background = pygame.image.load("background.jpg")
+background_rect = background.get_rect()
+
 score = 0
 
 triangle_original_surface = pygame.Surface((40,  40), pygame.SRCALPHA)
@@ -22,9 +28,7 @@ triangle = triangle_original_surface
 
 pygame.init()
 
-font = pygame.font.Font(None, 24)
-
-
+font = pygame.font.Font("freesansbold.ttf", 18)
 
 screen = pygame.display.set_mode((460, 460))
 pygame.display.set_caption('Circle Square Triangle')
@@ -59,7 +63,7 @@ while running:
         circle_velocity.y = -circle_velocity.y
     circle_pos = circle_pos + circle_velocity
 
-    screen.fill((0,0,0))
+    screen.blit(background, background_rect)
 
     # square rect and circle rect
     square_rect = pygame.Rect(square_pos.x, square_pos.y, 40, 40)
