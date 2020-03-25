@@ -13,29 +13,29 @@ DECLARE num_items_nobid AS INTEGER
 PRINT "===== Auction Setup - Sellers ====="
 
 PRINT "Number of items to sell:"
-READ num_items
+INPUT num_items
 
 WHILE num_items < 0 DO
     PRINT "invalid number"
     PRINT "how many items will be sold?"
-    READ num_items
+    INPUT num_items
 ENDWHILE
 
-FOR i ← 0 TO num_items-1:
+FOR i ← 0 TO num_items-1
     PRINT "-- Item", (i+1), " --"
     PRINT "Enter the description:"
-    READ description[i]
+    INPUT description[i]
     WHILE (LEN(description[i]) < 1) DO
         PRINT "Invalid description"
         PRINT "Enter the description:"
-        READ description[i]
+        INPUT description[i]
     ENDWHILE
     PRINT "Enter the reserve price:"
-    READ reserve_price[i]
+    INPUT reserve_price[i]
     WHILE reserve_price[i] < 0 DO
         PRINT "Invalid price"
         PRINT "Enter the reserve price:"
-        READ reserve_price[i]
+        INPUT reserve_price[i]
     DONE
     highest_bid[i] ← 0.0
 NEXT
@@ -46,21 +46,21 @@ WHILE i <> 0 DO
     FOR i ← 0 TO num_items-1
         PRINT (i+1), "-", description[i], "-", highest_bid[i]
     PRINT "Enter item number or 0 to quit:"
-    READ i
+    INPUT i
     WHILE (i<0 OR i>num_items) DO
         PRINT "Invalid choice"
         PRINT "Enter item number or 0 to quit:"
-        READ i
+        INPUT i
     ENDWHILE
 
     IF i > 0
         THEN
             PRINT "Enter the bid amount:"
-            READ bid
+            INPUT bid
             WHILE (bid < highest_bid[i-1]) DO
                 PRINT "bid too low"
                 PRINT "Enter the bid amount:"
-                READ bid
+                INPUT bid
             ENDWHILE
             highest_bid[i-1] ← bid
      ENDIF
